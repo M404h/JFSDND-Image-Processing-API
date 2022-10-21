@@ -50,7 +50,7 @@ route.get("/", imageValidator, async (req: Request, res: Response) => {
           return res.sendFile(imagePath_new);
         }
       } catch {
-        return "incorrect handeling";
+        return console.log(`incorrect handeling`);
       }
     } else {
       res.status(404)
