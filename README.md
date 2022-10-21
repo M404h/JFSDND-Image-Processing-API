@@ -22,9 +22,9 @@ in addition, ESlint and preitter packages where used.
 
 ## useful resoures 
 
-[params query](https://nodejs.org/en/knowledge/HTTP/clients/how-to-access-query-string-parameters/)
-[sharp](https://blog.logrocket.com/processing-images-sharp-node-js/#setting-up-a-sharp-image-project)
-[path](https://www.w3schools.com/nodejs/ref_path.asp)
-[supertest](https://www.npmjs.com/package/supertest)
-[preitter](https://prettier.io/docs/en/install.html)
-[not a number function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+ - [params query](https://nodejs.org/en/knowledge/HTTP/clients/how-to-access-query-string-parameters/)
+- [sharp](https://blog.logrocket.com/processing-images-sharp-node-js/#setting-up-a-sharp-image-project)
+- [path](https://www.w3schools.com/nodejs/ref_path.asp)
+- [supertest](https://www.npmjs.com/package/supertest)
+- [preitter](https://prettier.io/docs/en/install.html)
+- [not a number function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
