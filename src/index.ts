@@ -1,10 +1,12 @@
-import express from 'express';
+import express, { Application } from 'express';
+import route from './routes';
 
-const app =express();
-const port =3000;
+const app: Application = express();
+const port = 3000;
 
-app.listen(port, ()=>{
-console.log('listening on port', port);
+app.use('/', route);
+app.listen(port, (): void => {
+    console.log(`listening on ${port}`);
 });
 
 export default app;
