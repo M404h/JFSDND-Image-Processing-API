@@ -39,50 +39,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
+exports.imagePath_new = exports.resize_image = void 0;
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-var validator_1 = __importDefault(require("../middleware/validator"));
-var rezise_1 = require("./rezise");
-var rezise_2 = require("./rezise");
-var route = (0, express_1.Router)();
-route.get("/", validator_1.default, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var imageName, height, width, imagePath;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+var sharp_1 = __importDefault(require("sharp"));
+var imagePath_new;
+exports.imagePath_new = imagePath_new;
+var resize_image = function (imagePath, width, height, imageName) { return __awaiter(void 0, void 0, void 0, function () {
+    var resized_folder, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                imageName = req.query.image;
-                height = req.query.height;
-                width = req.query.width;
-                imagePath = path_1.default.join(__dirname, "../../assets/images", "".concat(imageName, ".jpg"));
-                if (!((height == null || width == null) && imageName != null)) return [3 /*break*/, 1];
-                //display when pass image name alone
-                if (fs_1.default.existsSync(imagePath)) {
-                    return [2 /*return*/, res.status(200).sendFile(imagePath)];
-                }
-                else {
-                    res.status(404)
-                        .send("<Center><br><<h1 style=\"Color:blue\"><Image have not been found</h1>\n        <p style=\"Color:black\">The image you are trying to reach, have not been found!</p>\n        </Center>");
-                }
-                return [3 /*break*/, 4];
+                _b.trys.push([0, 5, , 6]);
+                resized_folder = path_1.default.join(__dirname, "../../assets/resized");
+                if (!!fs_1.default.existsSync(resized_folder)) return [3 /*break*/, 2];
+                return [4 /*yield*/, fs_1.default.mkdirSync(resized_folder)];
             case 1:
-                if (!(height != null && width != null && imageName != null)) return [3 /*break*/, 4];
-                if (!fs_1.default.existsSync(imagePath)) return [3 /*break*/, 3];
-                return [4 /*yield*/, (0, rezise_1.resize_image)(imagePath, width, height, imageName)];
+                _b.sent();
+                _b.label = 2;
             case 2:
-                _a.sent();
-                if (rezise_2.imagePath_new != null) {
-                    if (fs_1.default.existsSync(rezise_2.imagePath_new)) {
-                        return [2 /*return*/, res.sendFile(rezise_2.imagePath_new)];
-                    }
-                }
-                return [3 /*break*/, 4];
+                exports.imagePath_new = imagePath_new = path_1.default.join(resized_folder, "".concat(imageName + "-" + width + "x" + height + ".jpg"));
+                if (!!fs_1.default.existsSync(imagePath_new)) return [3 /*break*/, 4];
+                // validatie if image exisit before with the same width and height
+                return [4 /*yield*/, (0, sharp_1.default)(imagePath)
+                        .resize(parseInt(width), parseInt(height))
+                        .toFile(imagePath_new)];
             case 3:
-                res.status(404)
-                    .send("<Center><br><<h1 style=\"Color:blue\"><Image have not been found</h1>\n    <p style=\"Color:black\">The image you are trying to rezise, have not been found!</p>\n    </Center>");
-                _a.label = 4;
-            case 4: return [2 /*return*/];
+                // validatie if image exisit before with the same width and height
+                _b.sent();
+                _b.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                _a = _b.sent();
+                return [2 /*return*/, console.log("incorrect handeling")];
+            case 6: return [2 /*return*/];
         }
     });
-}); });
-exports.default = route;
+}); };
+exports.resize_image = resize_image;

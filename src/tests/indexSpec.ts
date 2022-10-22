@@ -1,5 +1,7 @@
 import app from "../index";
 import supertest from "supertest";
+import {resize_image} from "../routes/rezise";
+import { buffer } from "stream/consumers";
 
 const req = supertest(app);
 
@@ -28,6 +30,11 @@ describe("Testing resize of images", () => {
     await req
       .get("/images_api?image=palmtunnell&width=400&height=400")
       .expect(404);
+  });
+  it("test if the image have been processed", async () => {
+    const rezise_function = resize_image("../../assets/images","200", "200", "fjord");
+    expect(rezise_function).toBeDefined;
+    
   });
 });
 

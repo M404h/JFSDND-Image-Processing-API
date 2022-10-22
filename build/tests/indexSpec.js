@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var index_1 = __importDefault(require("../index"));
 var supertest_1 = __importDefault(require("supertest"));
+var rezise_1 = require("../routes/rezise");
 var req = (0, supertest_1.default)(index_1.default);
 describe("Testing endpoints", function () {
     it("test the display of image palmtunnel", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -107,6 +108,14 @@ describe("Testing resize of images", function () {
                     _a.sent();
                     return [2 /*return*/];
             }
+        });
+    }); });
+    it("test the incorrect passing of image name to resize function", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var rezise_function;
+        return __generator(this, function (_a) {
+            rezise_function = (0, rezise_1.resize_image)("../../assets/images", "200", "200", "fjords");
+            expect(rezise_function).toContain('incorrect');
+            return [2 /*return*/];
         });
     }); });
 });
