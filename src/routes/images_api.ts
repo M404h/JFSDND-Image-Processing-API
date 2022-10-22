@@ -42,10 +42,13 @@ route.get("/", imageValidator, async (req: Request, res: Response) => {
           `${imageName + "-" + width + "x" + height + ".jpg"}`
         );
 
-        await sharp(imagePath)
+        if(!fs.existsSync(imagePath_new)){ 
+          // validatie if image exisit before with the same width and height
+          await sharp(imagePath)
           .resize(parseInt(width), parseInt(height))
           .toFile(imagePath_new);
 
+        }
         if (fs.existsSync(imagePath_new)) {
           return res.sendFile(imagePath_new);
         }

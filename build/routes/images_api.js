@@ -63,13 +63,13 @@ route.get("/", validator_1.default, function (req, res) { return __awaiter(void 
                     res.status(404)
                         .send("<Center><br><<h1 style=\"Color:blue\"><Image have not been found</h1>\n        <p style=\"Color:black\">The image you are trying to reach, have not been found!</p>\n        </Center>");
                 }
-                return [3 /*break*/, 9];
+                return [3 /*break*/, 10];
             case 1:
-                if (!(height != null && width != null && imageName != null)) return [3 /*break*/, 9];
-                if (!fs_1.default.existsSync(imagePath)) return [3 /*break*/, 8];
+                if (!(height != null && width != null && imageName != null)) return [3 /*break*/, 10];
+                if (!fs_1.default.existsSync(imagePath)) return [3 /*break*/, 9];
                 _b.label = 2;
             case 2:
-                _b.trys.push([2, 6, , 7]);
+                _b.trys.push([2, 7, , 8]);
                 resized_folder = path_1.default.join(__dirname, "../../assets/resized");
                 if (!!fs_1.default.existsSync(resized_folder)) return [3 /*break*/, 4];
                 return [4 /*yield*/, fs_1.default.mkdirSync(resized_folder)];
@@ -78,24 +78,27 @@ route.get("/", validator_1.default, function (req, res) { return __awaiter(void 
                 _b.label = 4;
             case 4:
                 imagePath_new = path_1.default.join(resized_folder, "".concat(imageName + "-" + width + "x" + height + ".jpg"));
+                if (!!fs_1.default.existsSync(imagePath_new)) return [3 /*break*/, 6];
                 return [4 /*yield*/, (0, sharp_1.default)(imagePath)
                         .resize(parseInt(width), parseInt(height))
                         .toFile(imagePath_new)];
             case 5:
                 _b.sent();
+                _b.label = 6;
+            case 6:
                 if (fs_1.default.existsSync(imagePath_new)) {
                     return [2 /*return*/, res.sendFile(imagePath_new)];
                 }
-                return [3 /*break*/, 7];
-            case 6:
+                return [3 /*break*/, 8];
+            case 7:
                 _a = _b.sent();
-                return [2 /*return*/, "incorrect handeling"];
-            case 7: return [3 /*break*/, 9];
-            case 8:
+                return [2 /*return*/, console.log("incorrect handeling")];
+            case 8: return [3 /*break*/, 10];
+            case 9:
                 res.status(404)
                     .send("<Center><br><<h1 style=\"Color:blue\"><Image have not been found</h1>\n    <p style=\"Color:black\">The image you are trying to rezise, have not been found!</p>\n    </Center>");
-                _b.label = 9;
-            case 9: return [2 /*return*/];
+                _b.label = 10;
+            case 10: return [2 /*return*/];
         }
     });
 }); });
