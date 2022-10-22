@@ -18,7 +18,7 @@ in addition, ESlint and preitter packages where used.
 ## API 
 - the base is `http://localhost:3000/`
 - to display image `http://localhost:3000/images_api?image=palmtunnel`
-- to resize image `http://localhost:3000/images_api?image=palmtunnel&width=20010&height=200`
+- to resize image `http://localhost:3000/images_api?image=palmtunnel&width=200&height=200`
 
 ## useful resoures 
 
