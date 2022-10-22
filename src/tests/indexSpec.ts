@@ -2,6 +2,9 @@ import app from "../index";
 import supertest from "supertest";
 import {resize_image} from "../routes/rezise";
 import { buffer } from "stream/consumers";
+import path from "path";
+import fs from "fs";
+
 
 const req = supertest(app);
 
@@ -32,9 +35,24 @@ describe("Testing resize of images", () => {
       .expect(404);
   });
   it("test if the image have been processed", async () => {
-    const rezise_function = resize_image("../../assets/images","200", "200", "fjord");
-    expect(rezise_function).toBeDefined;
-    
+    const imagePath = path.join(
+      __dirname,
+      "../../assets/images",
+      `fjord.jpg`
+    );
+    const resized_folder = path.join(__dirname, "../../assets/resized");
+
+    if (!fs.existsSync(resized_folder)) {
+      await fs.mkdirSync(resized_folder);
+    }
+    const imagePath_new = path.join(
+      resized_folder,
+      "fjord-200x200.jpg"
+    );
+    const rezise_function = resize_image(imagePath,"200", "200", "fjord");
+    rezise_function.then(() => {
+      expect(fs.existsSync(imagePath_new)).toBeTrue;
+    });
   });
 });
 

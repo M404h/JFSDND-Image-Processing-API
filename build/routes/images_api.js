@@ -68,6 +68,7 @@ route.get("/", validator_1.default, function (req, res) { return __awaiter(void 
             case 1:
                 if (!(height != null && width != null && imageName != null)) return [3 /*break*/, 4];
                 if (!fs_1.default.existsSync(imagePath)) return [3 /*break*/, 3];
+                console.log(imagePath);
                 return [4 /*yield*/, (0, rezise_1.resize_image)(imagePath, width, height, imageName)];
             case 2:
                 _a.sent();

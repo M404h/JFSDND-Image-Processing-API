@@ -42,6 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var index_1 = __importDefault(require("../index"));
 var supertest_1 = __importDefault(require("supertest"));
 var rezise_1 = require("../routes/rezise");
+var path_1 = __importDefault(require("path"));
+var fs_1 = __importDefault(require("fs"));
 var req = (0, supertest_1.default)(index_1.default);
 describe("Testing endpoints", function () {
     it("test the display of image palmtunnel", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -110,12 +112,26 @@ describe("Testing resize of images", function () {
             }
         });
     }); });
-    it("test the incorrect passing of image name to resize function", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var rezise_function;
+    it("test if the image have been processed", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var imagePath, resized_folder, imagePath_new, rezise_function;
         return __generator(this, function (_a) {
-            rezise_function = (0, rezise_1.resize_image)("../../assets/images", "200", "200", "fjords");
-            expect(rezise_function).toContain('incorrect');
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    imagePath = path_1.default.join(__dirname, "../../assets/images", "fjord.jpg");
+                    resized_folder = path_1.default.join(__dirname, "../../assets/resized");
+                    if (!!fs_1.default.existsSync(resized_folder)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, fs_1.default.mkdirSync(resized_folder)];
+                case 1:
+                    _a.sent();
+                    _a.label = 2;
+                case 2:
+                    imagePath_new = path_1.default.join(resized_folder, "fjord-200x200.jpg");
+                    rezise_function = (0, rezise_1.resize_image)(imagePath, "200", "200", "fjord");
+                    rezise_function.then(function () {
+                        expect(fs_1.default.existsSync(imagePath_new)).toBeTrue;
+                    });
+                    return [2 /*return*/];
+            }
         });
     }); });
 });

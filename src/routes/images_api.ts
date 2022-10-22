@@ -30,12 +30,14 @@ route.get("/", imageValidator, async (req: Request, res: Response) => {
   } else if (height != null && width != null && imageName != null) {
     //resize when height and width are passed
     if (fs.existsSync(imagePath)) {
+      console.log(imagePath);
       await resize_image(imagePath, width, height, imageName);
       if(imagePath_new!=null){
         if (fs.existsSync(imagePath_new)) {
           return res.sendFile(imagePath_new);
         }
       }
+
     } else {
       res.status(404)
         .send(`<Center><br><<h1 style="Color:blue"><Image have not been found</h1>
